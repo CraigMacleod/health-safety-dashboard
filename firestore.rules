@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read, update: if request.auth != null && request.auth.uid == userId;
+    }
+    function isCompanyUser(expectedRoles) {
+      let user = get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+      return request.auth != null &&
+             user.companyId == resource.data.companyId &&
+             user.role in expectedRoles;
+    }
+    match /incidents/{incidentId} {
+      allow read, write: if isCompanyUser(["admin", "supervisor"]);
+    }
+    match /permits/{permitId} {
+      allow read: if isCompanyUser(["admin", "supervisor", "worker"]);
+      allow write, update, delete: if isCompanyUser(["admin", "supervisor"]);
+    }
+    match /jsas/{jsaId} {
+      allow read: if isCompanyUser(["admin", "supervisor", "worker"]);
+      allow write, update, delete: if isCompanyUser(["admin", "supervisor"]);
+    }
+    match /sops/{sopId} {
+      allow read: if isCompanyUser(["admin", "supervisor", "worker"]);
+      allow create, update, delete: if isCompanyUser(["admin"]);
+    }
+  }
+}

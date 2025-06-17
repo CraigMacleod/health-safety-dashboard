@@ -1,0 +1,26 @@
+[
+  {
+    "document": "users/user_001",
+    "fields": {
+      "name": "Alice Admin",
+      "companyId": "company_abc",
+      "role": "admin"
+    }
+  },
+  {
+    "document": "users/user_002",
+    "fields": {
+      "name": "Sam Supervisor",
+      "companyId": "company_abc",
+      "role": "supervisor"
+    }
+  },
+  {
+    "document": "users/user_003",
+    "fields": {
+      "name": "Wendy Worker",
+      "companyId": "company_abc",
+      "role": "worker"
+    }
+  }
+]
