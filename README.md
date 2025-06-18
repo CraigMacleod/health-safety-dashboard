@@ -1,2 +1,3 @@
-# health-safety-dashboard
-Health &amp; Safety Tool for all Industry professionals  
+# Health & Safety Dashboard
+
+This is a Firebase + Vercel deployable web app for safety management.
